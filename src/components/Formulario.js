@@ -1,30 +1,53 @@
 import React, { Fragment, useState } from "react";
 
 export default function Formulario() {
-
   // Crear State de Citas
   const [cita, actualizarCita] = useState({
-    mascota: '',
-    propietario: '',
-    fecha: '',
-    hora: '',
-    sintomas: ''
-  })
+    mascota: "",
+    propietario: "",
+    fecha: "",
+    hora: "",
+    sintomas: "",
+  });
 
-  const actualizarState = e => {
+  const actualizarState = (e) => {
     actualizarCita({
       ...cita,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   // Extraer los valores
   const { mascota, propietario, fecha, hora, sintomas } = cita;
 
+  // Cuandoel usuario presiona agregar cita
+  const submitCita = (e) => {
+    e.preventDefault();
+    // Validar
+    if (
+      mascota.trim() === "" ||
+      propietario.trim() === "" ||
+      fecha.trim() === "" ||
+      hora.trim() === "" ||
+      sintomas.trim() === ""
+    ) {
+      console.log("Hay un error");
+      return;
+    }
+
+    console.log("Agregando...");
+
+    // Asignar un ID
+
+    // Crear la cita
+
+    // Reiniciar el form
+  };
+
   return (
     <Fragment>
       <h2>Crear Cita</h2>
-      <form>
+      <form onSubmit={submitCita}>
         <label htmlFor="">Nombre Mascota</label>
         <input
           type="text"
@@ -44,9 +67,21 @@ export default function Formulario() {
           value={propietario}
         />
         <label htmlFor="">Fecha</label>
-        <input type="date" name="fecha" className="u-full-width" onChange={actualizarState} value={fecha} />
+        <input
+          type="date"
+          name="fecha"
+          className="u-full-width"
+          onChange={actualizarState}
+          value={fecha}
+        />
         <label htmlFor="">Hora</label>
-        <input type="time" name="hora" className="u-full-width"onChange={actualizarState} value={hora} />
+        <input
+          type="time"
+          name="hora"
+          className="u-full-width"
+          onChange={actualizarState}
+          value={hora}
+        />
         <label htmlFor="">Sintomas</label>
         <textarea
           name="sintomas"
