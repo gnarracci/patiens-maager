@@ -10,6 +10,8 @@ export default function Formulario() {
     sintomas: "",
   });
 
+  const [error, actualizarError] = useState(false);
+
   const actualizarState = (e) => {
     actualizarCita({
       ...cita,
@@ -31,11 +33,11 @@ export default function Formulario() {
       hora.trim() === "" ||
       sintomas.trim() === ""
     ) {
-      console.log("Hay un error");
+      actualizarError(true)  
       return;
     }
 
-    console.log("Agregando...");
+    
 
     // Asignar un ID
 
@@ -47,6 +49,7 @@ export default function Formulario() {
   return (
     <Fragment>
       <h2>Crear Cita</h2>
+      {error ? <p className="alerta-error">Todos los campos son obligatorios!</p> : null}
       <form onSubmit={submitCita}>
         <label htmlFor="">Nombre Mascota</label>
         <input
