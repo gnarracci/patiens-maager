@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-
+import { v4 as uuid } from 'uuid';
 export default function Formulario() {
   // Crear State de Citas
   const [cita, actualizarCita] = useState({
@@ -33,13 +33,15 @@ export default function Formulario() {
       hora.trim() === "" ||
       sintomas.trim() === ""
     ) {
-      actualizarError(true)  
+      actualizarError(true);  
       return;
     }
-
     
+    // Eliminar el mensaje cuando los campos esten completos
+    actualizarError(false);
 
     // Asignar un ID
+    cita.id = uuid();
 
     // Crear la cita
 
